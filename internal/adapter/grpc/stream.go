@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/ak-repo/chat-application/backend/gen/chatpb"
+	"github.com/ak-repo/chat-application/gen/chatpb"
 )
 
 // ErrNoClient is returned when a recipient is not connected to this instance.

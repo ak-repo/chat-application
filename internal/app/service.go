@@ -8,8 +8,9 @@ import (
 	"log"
 	"time"
 
-	chat "github.com/ak-repo/chat-application/backend/gen/chatpb"
-	grpcserver "github.com/ak-repo/chat-application/backend/internal/adapter/grpc"
+	chat "github.com/ak-repo/chat-application/gen/chatpb"
+
+	grpcserver "github.com/ak-repo/chat-application/internal/adapter/grpc"
 	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 )

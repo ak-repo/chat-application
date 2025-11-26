@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: chat-password
       POSTGRES_DB: chat
     ports:
-      - "5442:5432"   # Local machine access: localhost:5442
+      - "542:5432"   # access DB locally via localhost:542
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -37,7 +37,7 @@ services:
   chat-service:
     build:
       context: ../
-      dockerfile: ./docker/chat-service.Dockerfile
+      dockerfile: Dockerfile.chat    # points to backend/Dockerfile.chat
     container_name: chat-service
     restart: always
     depends_on:
@@ -47,15 +47,17 @@ services:
         condition: service_healthy
     environment:
       CONFIG_PATH: /app/config/config.docker.yaml
+      POSTGRES_DSN: "postgres://chat-user:chat-password@postgres:5432/chat?sslmode=disable"
+      REDIS_ADDR: "redis:6379"
     ports:
-      - "50051:50051"     # gRPC for backend communication
+      - "50051:50051"     # gRPC service
     networks:
       - chatnet
 
   gateway:
     build:
       context: ../
-      dockerfile: ./docker/gateway.Dockerfile
+      dockerfile: Dockerfile.gateway     # points to backend/Dockerfile.gateway
     container_name: chat-gateway
     restart: always
     depends_on:
@@ -63,8 +65,10 @@ services:
         condition: service_started
     environment:
       CONFIG_PATH: /app/config/config.docker.yaml
+      GRPC_ADDR: "chat-service:50051"
+      REDIS_ADDR: "redis:6379"
     ports:
-      - "8080:8080"       # WebSocket + REST API
+      - "8080:8080"       # REST + WebSocket
     networks:
       - chatnet
 

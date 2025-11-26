@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/ak-repo/chat-application/backend/config"
+	"github.com/ak-repo/chat-application/config"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

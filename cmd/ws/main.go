@@ -8,8 +8,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ak-repo/chat-application/backend/config"
-	chat "github.com/ak-repo/chat-application/backend/gen/chatpb"
+	"github.com/ak-repo/chat-application/config"
+	chat "github.com/ak-repo/chat-application/gen/chatpb"
 	"github.com/gorilla/websocket"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

@@ -9,11 +9,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/ak-repo/chat-application/backend/config"
-	"github.com/ak-repo/chat-application/backend/gen/chatpb"
-	"github.com/ak-repo/chat-application/backend/internal/adapter/postgres"
-	"github.com/ak-repo/chat-application/backend/internal/app"
-	"github.com/ak-repo/chat-application/backend/pkg/db"
+	"github.com/ak-repo/chat-application/config"
+	"github.com/ak-repo/chat-application/gen/chatpb"
+	"github.com/ak-repo/chat-application/internal/adapter/postgres"
+	"github.com/ak-repo/chat-application/internal/app"
+	"github.com/ak-repo/chat-application/pkg/db"
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -34,8 +34,6 @@ func main() {
 	if cfg.Database.MinPoolSize < 1 {
 		cfg.Database.MinPoolSize = 1
 	}
-
-
 
 	pgDB, err := db.NewPostgresDB(context.Background(), cfg)
 	if err != nil {

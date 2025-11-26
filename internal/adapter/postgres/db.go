@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/ak-repo/chat-application/backend/gen/chatpb"
-	"github.com/ak-repo/chat-application/backend/internal/app"
+	"github.com/ak-repo/chat-application/gen/chatpb"
+	"github.com/ak-repo/chat-application/internal/app"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

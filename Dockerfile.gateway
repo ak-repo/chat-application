@@ -1,0 +1,21 @@
+# Build Stage
+FROM golang:1.25-alpine AS builder
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+
+# Build gateway service (cmd/gateway/main.go)
+RUN go build -o gateway ./cmd/gateway
+
+# Runtime Stage
+FROM alpine:3.19
+WORKDIR /app
+
+COPY --from=builder /app/gateway .
+
+EXPOSE 8080
+
+CMD ["./gateway"]
